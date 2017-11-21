@@ -1,0 +1,37 @@
+﻿<div style="background:#f0f9fd;position: absolute;left: 0;">
+	<div class="lefttop"><span></span>通讯录</div>
+    
+    <dl class="leftmenu">
+        
+    <dd>
+    <div class="title">
+    <span><img src="../images/leftico01.png" /></span>管理信息
+    </div>
+    	<ul class="menuson">
+            <li class="active"><cite></cite><a href="/main">首页信息</a><i></i></li>
+            <li><cite></cite><a href="/article/article-list">文章设置</a><i></i></li>   
+            <li><cite></cite><a href="/users/admin-list">管理员设置</a><i></i></li>  
+        </ul>  
+    </dd>
+    </dl>
+</div>
+
+<script type="text/javascript">
+$(function(){	
+	//导航切换
+	$(".menuson li").click(function(){
+		$(".menuson li.active").removeClass("active")
+		$(this).addClass("active");
+	});
+	
+	$('.title').click(function(){
+		var $ul = $(this).next('ul');
+		$('dd').find('ul').slideUp();
+		if($ul.is(':visible')){
+			$(this).next('ul').slideUp();
+		}else{
+			$(this).next('ul').slideDown();
+		}
+	});
+})	
+</script>
