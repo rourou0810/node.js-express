@@ -295,3 +295,20 @@ h2{font-weight:normal;}
 .seachform li label{padding-right:10px; float:left; line-height:32px;}
 .scinput{width:150px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .scbtn{width:85px;height:35px; background:url(../images/btnbg.png) no-repeat center; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;border-radius:3px; behavior:url(js/pie.htc);}
+
+
+/*addtip*/
+.addtip li{display: inline-block;}
+.tiplist{padding: 20px 22px;}
+.tiplist li{padding: 0 10px;margin-right: 15px;font-size: 14px;margin-bottom: 15px;} 
+.tiplist li span{float: right;}
+.tiplist li.current{background:antiquewhite;border:none;}
+
+.addtiplist{    border-top: solid 1px #a7b5bc;border-left: solid 1px #a7b5bc;
+    border-right: solid 1px #ced9df;
+    border-bottom: solid 1px #ced9df;
+    background: url(../images/inputbg.gif) repeat-x;
+    float: left;
+    width: 518px;padding: 8px;}
+.addtiplist li{float: left;clear: inherit;margin-right: 15px;}
+.addtiplist li span{display: inline-block;}
