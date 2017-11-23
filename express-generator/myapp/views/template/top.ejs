@@ -2,25 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>无标题文档</title>
+<title>后台管理系统</title>
 <link href="../stylesheets/style.css" rel="stylesheet" type="text/css" />
 <link href="../stylesheets/select.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../javascripts/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../javascripts/ueditor/editor_api.js"> </script>
-<script type="text/javascript" src="../javascripts/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script language="JavaScript" src="../javascripts/jquery.js"></script>
-
-<script type="text/javascript">
-$(function(){	
-	//顶部导航切换
-	$(".nav li a").click(function(){
-		$(".nav li a.selected").removeClass("selected")
-		$(this).addClass("selected");
-	})	
-})	
-</script>
-
-
+<script language="JavaScript" src="../javascripts/public.js"></script>
 </head>
 
 <body style="background:url(../images/topbg.gif) repeat-x;">
@@ -31,6 +17,7 @@ $(function(){
         
     <ul class="nav">
     <li><a href="/main" target="rightFrame" class="selected"><img src="../images/icon01.png" title="工作台" /><h2>首页信息</h2></a></li>
+    <li><a href="/main/tip" target="rightFrame"><img src="../images/icon02.png" title="标签管理" /><h2>标签管理</h2></a></li>
     <li><a href="/article/article-list"  target="rightFrame"><img src="../images/icon03.png" title="文章管理" /><h2>文章管理</h2></a></li>
     <li><a href="/users/admin-list"  target="rightFrame"><img src="../images/icon06.png" title="管理员设置" /><h2>管理员设置</h2></a></li>
     </ul>
@@ -43,7 +30,7 @@ $(function(){
     </ul>
      
     <div class="user">
-    <span>admin</span>
+    <span><%= username %></span>
     <i>消息</i>
     <b>5</b>
     </div>    

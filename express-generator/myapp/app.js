@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session');
+
 var login = require('./routes/login');
 var main = require('./routes/main');
 var article = require('./routes/article');
@@ -23,6 +25,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+    secret: '12345',    
+    name: 'testapp',   
+    cookie: {maxAge: 60*1000*3000 },  
+    resave: false,
+    saveUninitialized: true,
+ }));
 
 app.use('/', login);
 app.use('/login', login);
@@ -45,7 +55,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  //res.render('error',{username:req.session.username});
 });
 
 module.exports = app;

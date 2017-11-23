@@ -5,7 +5,8 @@
  * http://www..com
  * e-mail: admin@.com
  */
-*{font-size:9pt;border:0;margin:0;padding:0;}
+*{border:0;margin:0;padding:0;}
+div{font-size: 9pt;}
 body{font-family:'微软雅黑'; margin:0 auto;min-width:980px;}
 ul{display:block;margin:0;padding:0;list-style:none;}
 li{display:block;margin:0;padding:0;list-style: none;}
@@ -15,13 +16,20 @@ a,a:focus{text-decoration:none;color:#000;outline:none;blr:expression(this.onFoc
 a:hover{color:#00a4ac;text-decoration:none;}
 table{border-collapse:collapse;border-spacing: 0;}
 cite{font-style:normal;}
-h2{font-weight:normal;}
-
+/*H1:24px; H2:18px; H3:14px; H4:13.5px; H5:10px; H6:9px;*/
+h1{font-size: 28px;}
+h2{font-size: 24px;}
+h3{font-size: 20px;}
+h4{font-size: 16px;}
+h5{font-size: 14px;}
+.nav h2{font-weight:normal;}
+*/
 /*cloud*/
 
 #mainBody {width:100%;height:100%;position:absolute;z-index:-1;}
 .cloud {position:absolute;top:0px;left:0px;width:100%;height:100%;background:url(../images/cloud.png) no-repeat;z-index:1;opacity:0.5;}
 #cloud2 {z-index:2;}
+.menuson a{font-size: 9pt;}
 
 
 /*login*/
@@ -184,7 +192,7 @@ h2{font-weight:normal;}
 .forminfo{padding-left:23px;}
 .forminfo li{margin-bottom:13px; clear:both;}
 .forminfo li label{width:86px;line-height:34px; display:block; float:left;}
-.forminfo li i{color:#7f7f7f; padding-left:20px; font-style:normal;}
+.forminfo li i{color:#7f7f7f;/* padding-left:20px;*/ }
 .forminfo li cite{display:block; padding-top:10px;}
 .dfinput{width:345px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .textinput{border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; padding:10px; width:504px; height:135px; line-height:20px; overflow:hidden;}
@@ -192,7 +200,7 @@ h2{font-weight:normal;}
 
 
 /*tip*/
-.tip{width:485px; height:260px; position:absolute;top:10%; left:30%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.tip{width:485px; height:260px; position:absolute;top:50%; left:30%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:1px;behavior:url(js/pie.htc); display:none; z-index:111111;}
 .tiptop{height:40px; line-height:40px; background:url(../images/tcbg.gif)  repeat-x; cursor:pointer;}
 .tiptop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
 .tiptop a{display:block; background:url(../images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
@@ -202,7 +210,7 @@ h2{font-weight:normal;}
 .tipright{float:left;padding-top:15px; padding-left:10px;}
 .tipright p{font-size:14px; font-weight:bold; line-height:35px;}
 .tipright cite{color:#858686;}
-.tipbtn{margin-top:25px; margin-left:125px;}
+.tipbtn{margin-top:25px; margin-left:190px;}
 .sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(../images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
 .cancel{background:url(../images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
 
@@ -276,7 +284,7 @@ h2{font-weight:normal;}
 .tabson{margin:18px 0px;}
 .formtext{height:45px; padding-left:25px; line-height:20px; color:#848383;}
 .formtext b{color:#d70101;}
-.forminfo b{color:#ea2020; padding-left:3px;}
+.forminfo label b{color:#ea2020; padding-left:3px;}
 
 /*class*/
 .classlist li{float:left;margin-right:10px;margin-bottom:10px;padding:12px;border:1px solid #ebebeb; background:#fcfcfc;}
@@ -301,7 +309,8 @@ h2{font-weight:normal;}
 .addtip li{display: inline-block;}
 .tiplist{padding: 20px 22px;}
 .tiplist li{padding: 0 10px;margin-right: 15px;font-size: 14px;margin-bottom: 15px;} 
-.tiplist li span{float: right;}
+.tiplist li i{font-style: inherit;}
+.tiplist li span{float: right;display: none;}
 .tiplist li.current{background:antiquewhite;border:none;}
 
 .addtiplist{    border-top: solid 1px #a7b5bc;border-left: solid 1px #a7b5bc;
@@ -309,6 +318,11 @@ h2{font-weight:normal;}
     border-bottom: solid 1px #ced9df;
     background: url(../images/inputbg.gif) repeat-x;
     float: left;
-    width: 518px;padding: 8px;}
+    width: 520px;padding: 8px;margin-bottom: 20px;box-sizing: border-box;}
 .addtiplist li{float: left;clear: inherit;margin-right: 15px;}
 .addtiplist li span{display: inline-block;}
+
+
+.place,.formtext,lable{font-size: 9pt;}
+
+.w-e-icon-upload2{font-size: 80px;}

@@ -1,0 +1,142 @@
+
+<body>
+<%- include('template/top') -%>
+<div style="position: relative;top:88px;">
+	<%- include('template/left') -%>
+	<div style="position: absolute;left: 187px;width: 86%;">
+		<div class="rightinfo" style="padding: 50px 20px;">
+			<div class="addtip">
+				<ul class="forminfo">
+					<li><label>标签名称<b>*</b></label><input name="tipname" type="text" class="dfinput" placeholder="标签名称"  style="width:250px;"  />
+					<input type="hidden" name="tipId" value="">
+					</li>
+					<li><label>&nbsp;</label><input name="" type="button" class="btn" value="新增 / 编辑标签" id="addTipBtn"/></li>
+				</ul>
+			</div>
+            <div class="tools tiplist">
+                <ul class="toolbar">
+                    <!-- <li></li>i><i class="text">添加</i><span></span></li>
+                    <li><i class="text">修改</i><span></span></li>
+                    <li><i class="text">删除</i><span></span></li>
+                    <li><i class="text">统计</i><span></span></li> -->
+                </ul>
+            </div>
+
+            <div class="tip">
+                <div class="tiptop"><span>提示信息</span><a></a></div>
+                
+                <div class="tipinfo">
+                    <span><img src="../images/ticon.png" /></span>
+                    <div class="tipright">
+                    <p class="tipmsg"></p>
+                    <!-- <cite>如果是请点击确定按钮 ，否则请点取消。</cite> -->
+                    </div>
+                    </div>
+                    
+                    <div class="tipbtn">
+                    <input name="" type="button"  class="sure" value="确定" />&nbsp;
+                    <!-- <input name="" type="button"  class="cancel" value="取消" /> -->
+                </div>
+            
+            </div>
+        </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+	getTipList();
+	var current_span;
+	$('.tiplist ul li .text').live("click",function() {
+		var current_tip = $(this).text();
+		var current_tipId = $(this).parent().attr('id');
+		$('input[name="tipname"]').val(current_tip);
+		$('input[name="tipId"]').val(current_tipId);
+		$(this).parent().addClass('current').siblings().removeClass('current');
+	});
+	$('.tiplist ul li').live("hover",function() {
+		current_span = $(this).find('span');
+		current_span.show().empty().append('<img src="../images/t03.png" />');
+		current_span.parent().siblings().find('span').hide();
+		current_span.live("click",function(event) {
+			var deletTipId = current_span.parent().attr('id');
+			deletTipById(deletTipId);
+			event.preventDefault();
+		});
+	});
+	/*$('.tiplist ul li').live("mouseout",function() {
+		$(this).find('span').hide();
+	})*/
+
+	//增加/编辑标签
+	$('#addTipBtn').click(function() {
+		if($('input[name="tipname"]').val() == "") {
+			$('.tipmsg').text('标签名称不能为空！');
+			$(".tip").fadeIn(200);
+			return false;
+		}
+		$.ajax({
+			type : 'post',
+			url : '/main/addTip',
+			data : {
+				id:$('input[name="tipId"]').val(),
+				tipname : $('input[name="tipname"]').val()
+			},
+			dataType : 'json',
+			success : function(msg) {
+				$('.tipmsg').text(msg.data);
+				$(".tip").fadeIn(200);
+				if(msg.code == 1) {
+					$(".sure").click(function(){
+						$('input[name="tipId"]').val("");
+						$('input[name="tipname"]').val("");
+				        $(".tip").fadeOut(100);
+				        //window.location.href = '/main/tip';
+				        getTipList();
+				    });
+				}
+			}
+		})
+	});
+
+	//获取所有标签
+	function getTipList() {
+		var tipListStr = '',result;
+		$.ajax({
+			type : 'post',
+			async:false,
+			url : '/main/getTipList',
+			dataType : 'json',
+			success : function(msg) {
+				if(msg.code == 1) {
+					result = msg.data;
+					if(result.length != 0) {
+						result.forEach(function(item){
+							tipListStr += '<li id="'+item.id+'"><i class="text">'+item.tipname+'</i><span></span></li>';
+						});
+						$('.tiplist .toolbar').empty().append(tipListStr);
+					}
+				}
+			}
+		});
+	}
+
+	//删除标签
+	function deletTipById(deletTipId) {
+		$.ajax({
+			type : 'post',
+			async:false,
+			url : '/main/deletTip',
+			data : {
+				id : deletTipId
+			},
+			dataType : 'json',
+			success : function(msg) {
+				getTipList();
+			}
+		});
+	}
+});
+</script>
+</body>
+</html>

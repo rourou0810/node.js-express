@@ -15,7 +15,7 @@
             <div id="usual1" class="usual"> 
                 <div class="itab">
                     <ul> 
-                    <li><a href="#tab1" class="selected">发布通知</a></li> 
+                    <li><a href="#tab1" class="selected">发布文章</a></li> 
                     </ul>
                 </div> 
     
@@ -23,29 +23,32 @@
     
                 <div class="formtext">Hi，<b>admin</b>，欢迎您试用信息发布功能！</div>
     
-                <ul class="forminfo">
-                    <li><label>招聘企业<b>*</b></label><input name="" type="text" class="dfinput" value="请填写单位名称"  style="width:518px;"/></li>
+                <ul class="forminfo" id="addArticleList">
+                    <li><label>文章名称<b>*</b></label><input name="article_name" type="text" class="dfinput" placeholder="请填写文章名称"  style="width:518px;"/></li>
                
-                    <li><label>职位名称<b>*</b></label><input name="" type="text" class="dfinput" value="请填写单位名称"  style="width:518px;"/></li>
+                    <li><label>文章作者<b>*</b></label><input name="author" type="text" class="dfinput" placeholder="请填写文章作者"  style="width:518px;"/></li>
     
                     <li><label>文章标签<b>*</b></label>
                         
                         <div class="addtiplist">
                             <ul>
-                                <li><input name="" type="checkbox" value="" checked="checked"/><span>前端</span></li>
-                                <li><input name="" type="checkbox" value=""/><span>Node.js</span></li>
-                                <li><input name="" type="checkbox" value=""/><span>Javascript</span></li>
+                                <!-- <li><input type="checkbox" value=""/><span>前端</span></li>
+                                <li><input type="checkbox" value=""/><span>Node.js</span></li>
+                                <li><input type="checkbox" value=""/><span>Javascript</span></li> -->
                             </ul> 
                         </div>
                         
                     </li>
-                    <li><label style="float: none;">通知内容<b>*</b></label>
+                    <li><label style="float: left;">通知内容<b>*</b></label>
     
-
-                    <script id="editor" type="text/plain" style="width:1000px;height:500px;"></script>
+                    <div style="float: left;margin-bottom: 20px;">
+                        <div id="editor">
+                            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+                        </div>
+                    </div>
                     
                     </li>
-                    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="马上发布"/></li>
+                    <li><label>&nbsp;</label><input name="" type="button" class="btn" value="马上发布" id="addArticleBtn" /></li>
                 </ul>
     
             </div>             
@@ -53,6 +56,65 @@
         </div> 
     </div>
 </div>
+<script type="text/javascript" src="../javascripts/wangEditor.min.js"></script>
 <script type="text/javascript">
-    var ue = UE.getEditor('editor');
+$(function() {
+    var E = window.wangEditor;
+    var editor = new E('#editor');
+    // 或者 var editor = new E( document.getElementById('#editor') )
+     // 下面两个配置，使用其中一个即可显示“上传图片”的tab。但是两者不要同时使用！！！
+    // editor.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
+    editor.customConfig.uploadImgServer = '/upload'  // 上传图片到服务器
+    editor.create();
+    //console.log(editor.txt.html());
+
+    getTipList();
+
+    $('#addArticleBtn').click(function() {
+        var checkedList = [];
+        $('input[type="checkbox"]:checked').each(function() {
+            var checkedVal = $(this).val();
+            checkedList.push(checkedVal);
+        });
+        var params = {
+            title : $('input[name="article_name"]').val(),
+            author : $('input[name="author"]').val(),
+            tipId : checkedList,
+            content: editor.txt.html()
+        };
+
+        $.ajax({
+            type : 'post',
+            async:false,
+            url : '/article',
+            data : params,
+            dataType : 'json',
+            success : function(msg) {
+                
+            }
+        });
+    });
+
+    //获取所有标签
+    function getTipList() {
+        var tipListStr = '',result;
+        $.ajax({
+            type : 'post',
+            async:false,
+            url : '/main/getTipList',
+            dataType : 'json',
+            success : function(msg) {
+                if(msg.code == 1) {
+                    result = msg.data;
+                    if(result.length != 0) {
+                        result.forEach(function(item){
+                            tipListStr += '<li><input name="tip" type="checkbox" value="'+ item.id +'"/><span>'+ item.tipname +'</span></li>';
+                        });
+                        $('.addtiplist ul').empty().append(tipListStr);
+                    }
+                }
+            }
+        });
+    }
+});
 </script>
